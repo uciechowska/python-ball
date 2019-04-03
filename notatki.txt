@@ -1,0 +1,28 @@
+Rozpoznawanie M na ekranie
+--------------------------
+
+1. Wczytywać obraz z kamerki.
+2. Rozpoznawać zielonaą kulkę.
+3. Co zrobić z jedną klatką.
+4. A co z serią klatek.
+5. Jak rozpoznac "M".
+6. Jaki interfejs.
+
+approxy poli dp -(z punktow wyznacza jakas linie)
+--------
+
+1. a→ OpenCV / pygame ?
+2. Kalibracja koloru kulki (krzyżyk na srodku ekranu) + HSV (np. tolerancja barwy +-10/360)
+   np barwa 170.
+3. Filtrowanie: zawezamy barwe (H) do 160-180 i zakladamy, ze na ekranie tylko kulka ma taki kolor.
+   Znajdujemy srodek uzyskanej plamy (srodek ciezkosci = srednia x,y).
+   Odszumianie: erode/dilate.
+   Akceptacja klatki dopiero gdy odfiltrowna i odszumiana plama jest "duza".
+4. Z serii klatek zbieramy dane: (czas,x,y)
+5. ? Nx(czas,x,y) → "M"
+   Caly czas sledzimy trajekorie i gdy jej koncowka bedzie jak "M" to akceptujemy.
+6. ? Na poczatku skroty klawiszowe albo nawet bez interfejsu:
+   Tzn. program dziala w krokach:
+     1. uruchmienie
+     2. 10 sekund na kalibracje (ustawienie kulki na krzyzyku na sr. ekranu)
+     3. gdy rozpozna "M" to wychodzi z programu + komunikat. 
